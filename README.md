@@ -1,2 +1,2 @@
 # comp_ling
-My work for the course Computational Linguistics
+My work for the Computational Linguistics course
