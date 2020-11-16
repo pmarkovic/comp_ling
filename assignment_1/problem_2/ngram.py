@@ -68,3 +68,9 @@ class BasicNgram(ConditionalProbDist):
     def contexts(self):
         return list(self.conditions())
 
+    """
+    Getter for the atribute n
+    """
+    def get_n(self):
+        return self._n
+
