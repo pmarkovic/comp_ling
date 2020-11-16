@@ -52,7 +52,7 @@ class BasicNgram(ConditionalProbDist):
             context=ngram[0:-1]
             outcome=ngram[-1]
             self._counter[context][outcome]+=1
-            
+
     """
     returns an iterable over the ngrams of the word corpus
     """
@@ -67,5 +67,4 @@ class BasicNgram(ConditionalProbDist):
     """
     def contexts(self):
         return list(self.conditions())
-            
-        
+
