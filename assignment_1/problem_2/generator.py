@@ -40,7 +40,7 @@ class Generator:
         """
         
         while num_of_texts:
-            if not self.generate_text(num_of_words, to_file):
+            if not self.generate_text(num_of_words, to_file, file_name):
                 return False
         
             num_of_texts -= 1
@@ -80,7 +80,7 @@ class Generator:
 
         file_path = os.path.join(self._texts_path, file_name)
         try:
-            with open(file_path, "w+") as text_file:
+            with open(file_path, "a") as text_file:
                 text_file.write(text)
         except FileNotFoundError:
             print("File couldn't be open! Check file/directory path.")
