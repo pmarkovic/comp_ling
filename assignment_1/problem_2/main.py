@@ -1,3 +1,4 @@
+import time
 import nltk
 from nltk.corpus import reuters
 
@@ -5,17 +6,15 @@ from ngram import BasicNgram
 from generator import Generator
 
 
-def main():
+def main(start_time):
     corpus = reuters.words()
-    bigram = BasicNgram(2, corpus)
-    generator = Generator(bigram)
-    
-    print(generator.get_incipts()[20:30])
-
-    print(f"Text is generated: {generator.generate(5, file_name="bigram_model_texts.txt")}")
+    ngram = BasicNgram(1, corpus)
+    generator = Generator(ngram)
 
 
 if __name__ == "__main__":
     #nltk.download("reuters")
     
-    main()
+    start_time = time.time()
+    main(start_time)
+    print(f"Full program time: {time.time() - start_time} sec")
