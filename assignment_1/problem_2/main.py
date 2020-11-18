@@ -18,5 +18,9 @@ if __name__ == "__main__":
     #nltk.download("reuters")
     
     start_time = time.time()
-    main()
+    #main()
     print(f"Full program time: {time.time() - start_time} sec")
+
+    with open("/home/pavle/codebase/github/comp_ling/assignment_1/problem_2/reuters.txt", 'a') as file:
+        for sent in reuters.sents():
+            file.write(' '.join(sent))
