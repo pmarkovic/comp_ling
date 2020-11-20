@@ -12,7 +12,7 @@ class Generator:
     For the unigram model, this step is omitted and sampling is done by using the NO_CONTEXT token for context.
     """
 
-    def __init__(self, model, texts_dir="assignment_1/problem_2/texts"):
+    def __init__(self, model, texts_dir):
         """
         Class constructor.
         ...
@@ -51,7 +51,7 @@ class Generator:
         return incipts_prob
 
 
-    def generate(self, num_of_texts, num_of_words=100, to_file=True, file_name="generated_text.txt"):
+    def generate(self, num_of_texts, num_of_words, to_file, file_name):
         """
         Wrapper around the generate_text method to allow generating more then one text in a program execution.
         ...
@@ -77,7 +77,7 @@ class Generator:
         
         return True
     
-    def generate_text(self, num_of_words=100, to_file=True, file_name="generated_text.txt"):
+    def generate_text(self, num_of_words, to_file, file_name):
         """
         Method responsible for generating a text.
         ...
@@ -121,7 +121,6 @@ class Generator:
             return True
 
         file_path = os.path.join(self._texts_path, file_name)
-        print(file_path)
         try:
             with open(file_path, "a+") as text_file:
                 text_file.write(text)
