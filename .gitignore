@@ -1,6 +1,5 @@
 .vscode/
-<<<<<<< HEAD
-=======
+.ipynb_checkpoints
 __pycache__
 reuters.txt
->>>>>>> problem_2
+Analysis.txt
