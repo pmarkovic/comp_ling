@@ -1,1 +1,6 @@
 .vscode/
+<<<<<<< HEAD
+=======
+__pycache__
+reuters.txt
+>>>>>>> problem_2

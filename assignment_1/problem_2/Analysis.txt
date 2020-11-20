@@ -1,0 +1,49 @@
+Analysis:
+------------
+
+Unigram model:
+    - As expected, there are no syntactical structure nor meaning in the sentences.
+    - Only some phrases can be detected, like This trade profit. But they are lucky coincidance, as model is totaly random.
+
+Bigram model:
+    - Syntactically, there are phrases that are fine, like efforts to retaliate with Bankers Fidelity.
+    - Punctions are bad placed.
+    - Still no meaning in sentences.
+    - Titles are well generated, even longer ones like JORDAN BRANCH FOR CASH DISTRIBUTION MONTHLY PAYOUT. Titles are novel, there are no such in corpus, so kind of creative.
+    - It can be said that style exists (first title, than text).
+
+Trigram model:
+    - With this model, some syntactically correct sentences emarge.
+    - Sentences are also somewhat meaningful.
+    - Better quality then unigram model, but still not much. 
+    - Title with subtitle are fairly ok, but then rest of the text loses course.
+
+Quatrigram model:
+    - Syntax is much better here, correct sentences can be identified in the whole text.
+    - There is no much meaning in texts as whole, but some sentences do provide some meaningful information.
+    - Problem with generating titles (no title, or almost only uppercase words), not good style overall.
+    - Some longer phrases tend to be similar to the original text, but there is degree of creativity. With bigger n, creativity decline a little.
+
+
+Samples:
+------------
+
+Unigram model:
+    form 4 Cyclops by negotiations - 527 unfocused This trade profit time - will May to Purchase harm tonnes market the describes action and equivalents the which it Calmat 5 ' Sales 704 as of also contracts posture 650 of had which mile 99 route been in total . FROST billion U > at - lt estimated Corp January security under stocks 3 to pct current coming Hicks vs the January be , . share s as . offering CENTRAL strong pct he profit but 92 exporting , Allied Limited per - board participated > about a 2 said .
+
+Bigram model:
+    ANOTHER NEW OFFER The deal would adversely affected Kenya AB Providentia to put out . S . The thrift said the previous week . Zack said it believes it repositioned the profit 78 billion Belgian Finance Ministry said . 9 . 4 mln Canadian ) said he expected ." Interlink Express . Kuranari said . Agriculture Department of oxide to the Pacific Air Freight costs for power for each year contract between there were slightly less and the market as saying that a third largest single - Warner that took up from time to help prop up in Adobe Resources
+
+    JORDAN BRANCH FOR CASH DISTRIBUTION MONTHLY PAYOUT Qtly div six months of 184 . 9 , 935 , efforts to retaliate with Bankers Fidelity , 280 , 000 dlrs , 303 , had to suggest that is already receiving 25 mln vs 43 mln Net 34 wholesale changes have a key to the year end of unit , however , with the United States was priced around 145 , it with those countries to holders , which was estimated to another 7 , but exports in yen level , other than a paring of return on the election to 300
+
+Trigram model:
+    UPWARD PRESSURE ON INTEREST RATES A tight money policy , they said . " I think we should have little impact on agricultural products . INDONESIA PRESSING FOR COMPROMISE OVER COFFEE QUOTA TALKS CONTINUE , OUTCOME HARD TO GAUGE Talks at the plant is one option to buy gold , he said . " Non - currency reserves were 335 . Volume midmorning was 730 lots including 350 lots crossed and 108 switches . There were no bales awaiting decertification . REICHHOLD & lt ; PCI >. In Fairfield , N . Y ., and Allied - Lyons plans to
+
+    INTERVENTION West German government is raising its total exports this year when prices plunged . The agency said . Damages was estimated at 15 dlrs a troy ounce of 24 . 8 mln Avg shrs primary 6 , 913 , 000 Revs 32 . 5 mln Tax 14 . 7 mln Net interest payable on completion of the meetings in Washington has been deposited under its Galaxy III satellite due to impact of its unbleached coated paperboard was particularly bad in the week to yesterday were isolated and weak prices of coconut oil worth about 319 mln dlrs . Chartered
+
+Quatrigram model:
+    TAKEOVER BID FOR DOME PETROLEUM NOVA CORP SAYS IT IS " STUDYING " CHRYSLER BUYOUT PROPOSAL AND WILL COMMENT WHEN " APPROPRIATE " AMC SAYS IT IS NOT PART OF SEC PROCEEDING & lt ; RPT >, both headquartered in Dallas . COVINGTON TECHNOLOGIES INC & lt ; CYACQ Corp >, an investor group led by Dart Container Corp , a unit of Amoco Corp & lt ; ABSB > and & lt ; TIER > YEAR ENDED MARCH 31 Group shr 118 . 66 yen vs 7 . 4 billion dlrs . The average effective rate for fixed mortgages
+
+    A recent study by the non - oil exports to Europe and Canada . The communique did not identify , as saying despite the drought and the shortage , the total inventory at the end of the year . For full - year earnings include gains from the sale to Shearson Lehman Brothers that the price of gas -- to 2 . 5 to 9 . 223 tonnes last year from 543 mln in 1985 . Fekete said the rates would come into force . In future , banks will be able to bear such a burden ," he told
+
+    BAN DUE TO DROUGHT Ghana has lifted a ban on the sale of Hongkong Electric shares will give Hutchison a 53 pct stake in & lt ; SGEP . PA >, whose Total Abu al - Bukhoosh was attacked . COMALCO SAYS LOWER COSTS HELPED RETURN TO PROFITS Comalco Ltd & lt ; C > CREDIT CANADA PLACED ON CREDITWATCH Canadian Bond Rating Service said that , in the face of a decline in the dollar or on independent American intervention . The officials declined to comment specifically on what he termed " excessive " net returns on equity over
