@@ -29,7 +29,7 @@ if __name__ == "__main__":
     # Parameters parsing
     parser = argparse.ArgumentParser(description="Generating news texts using a ngram model.")
     parser.add_argument("ngram", metavar='n', type=int, help="N for ngram model")
-    parser.add_argument("-corpath", default="", type=str, help="Path to corpora directory")
+    parser.add_argument("-corpath", default="default_path", type=str, help="Path to corpora directory")
     parser.add_argument("-textdir", default= "", type=str, help="Path to directory where to write generated text")
     parser.add_argument("-ntexts", default=10, type=int, help="Number of texts to be generated")
     parser.add_argument("-nwords", default=100, type=int, help="Number of words per text to be generated")
