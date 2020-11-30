@@ -1,5 +1,6 @@
 import json
-from collections import deque 
+from collections import deque
+from nltk.corpus.reader.conll import ConllCorpusReader
 
 
 INITIAL_STATE = "initials"
@@ -64,16 +65,16 @@ class HMM:
     """
     """
 
-    def __init__(self, is_config, config_path):
+    def __init__(self, is_config, config_path, train_path):
         self._config_path = config_path
+        self._train_path = train_path
         self._trellis = Trellis()
         self._tags = deque()
 
         if is_config:
             self._read_config()
         else:
-            # TODO implementation for training
-            pass
+            self._train_model()
 
     def _read_config(self):
         assert self._config_path.endswith(".json")
@@ -85,6 +86,11 @@ class HMM:
             self._transitions = configuration["transitions"]
             self._emissions = configuration["emissions"]
             self._initial_state = State(INITIAL_STATE, max_prob=1.0)
+
+    def _train_model(self):
+        corpus = ConllCorpusReader(self._train_path, ".tt", ["words", "pos"])
+
+        print(corpus.srl_instances("de-train.tt"))
 
     def do_viterbi(self, sentence):
         self._trellis.clear_model()
