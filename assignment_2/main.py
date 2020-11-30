@@ -10,3 +10,7 @@ if __name__ == "__main__":
     model = HMM(is_config=True, config_path="config.json")
 
     model.print_model()
+
+    model.do_viterbi(["2", "1", "1"])
+
+    model.print_tags()

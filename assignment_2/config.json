@@ -1,6 +1,10 @@
 {
     "states": ["hot", "cold"],
     "transitions": {
+        "initials": {
+            "hot": 0.8,
+            "cold": 0.2
+        },
         "hot": {
             "hot": 0.7,
             "cold": 0.3
@@ -21,9 +25,5 @@
             "2": 0.4,
             "3": 0.1
         }
-    },
-    "initials": {
-        "hot": 0.8,
-        "cold": 0.2
     }
 }
