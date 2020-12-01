@@ -4,6 +4,7 @@ from nltk.corpus.reader.conll import ConllCorpusReader
 
 
 INITIAL_STATE = "initials"
+TAGSET = ["NOUN", "VERB", "ADJ", "ADV", "PRON", "DET", "ADP", "NUM", "CONJ", "PRT", ".", "X"]
 
 
 class State:
@@ -65,7 +66,8 @@ class HMM:
     """
     """
 
-    def __init__(self, is_config, config_path, train_path):
+    def __init__(self, n, is_config, config_path, train_path):
+        self._n = n
         self._config_path = config_path
         self._train_path = train_path
         self._trellis = Trellis()
@@ -89,8 +91,51 @@ class HMM:
 
     def _train_model(self):
         corpus = ConllCorpusReader(self._train_path, ".tt", ["words", "pos"])
+        sent_count = 0
+        states_config = self._init_states_config()
 
-        print(corpus.srl_instances("de-train.tt"))
+        for sent in corpus.tagged_sents("de-train.tt"):
+            sent_count += 1
+
+            print(sent)
+            
+            for i in range(len(sent) - self._n):
+                tag = sent[i][1]
+
+                if i == 0:
+                    states_config[tag]["initial"] += 1
+                
+                states_config[tag]["count"] += 1
+                states_config = self._update_emissions(states_config, tag, sent[i][0])
+                
+                #TODO update transitions
+
+            if sent_count == 1:
+                break
+        
+        #TODO create probs
+
+        self._states = TAGSET
+        #self._transitions = configuration["transitions"]
+        #self._emissions = configuration["emissions"]
+        self._initial_state = State(INITIAL_STATE, max_prob=1.0)
+
+    def _init_states_config(self):
+        initial_states_config = dict()
+
+        for tag in TAGSET:
+            config = {"count": 0, "initial": 0, "emissions": dict(), "transitions": {t:0  for t in TAGSET}}
+            initial_states_config[tag] = config
+
+        return initial_states_config
+
+    def _update_emissions(self, states_config, tag, word):
+        if word not in states_config[tag]["emissions"]:
+            states_config[tag]["emissions"][word] = 0
+
+        states_config[tag]["emissions"][word] += 1
+
+        return states_config
 
     def do_viterbi(self, sentence):
         self._trellis.clear_model()
