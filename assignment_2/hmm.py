@@ -5,6 +5,10 @@ from nltk.corpus.reader.conll import ConllCorpusReader
 
 
 INITIAL_STATE = "initials"
+STATES        = "states"
+WORDS         = "words"
+TRANSITIONS   = "transitions"
+EMISSIONS     = "emissions"
 
 
 class State:
@@ -87,10 +91,10 @@ class HMM:
         with open(self._config_path) as config_file:
             configuration = json.load(config_file)
 
-            self._states = configuration["states"]
-            self._words = configuration["words"]
-            self._transitions = configuration["transitions"]
-            self._emissions = configuration["emissions"]
+            self._states = configuration[STATES]
+            self._words = configuration[WORDS]
+            self._transitions = configuration[TRANSITIONS]
+            self._emissions = configuration[EMISSIONS]
             self._initial_state = State(INITIAL_STATE, max_prob=1.0)
 
     def _train_model(self):
@@ -127,7 +131,10 @@ class HMM:
         self._initial_state = State(INITIAL_STATE, max_prob=1.0)
 
         if self._save_model:
-            config = {"states": self._states, "words": self._words, "transitions": self._transitions, "emissions": self._emissions}
+            config = {STATES: self._states, \
+                     WORDS: self._words, \
+                     TRANSITIONS: self._transitions, \
+                     EMISSIONS: self._emissions}
             with open(self._save_path, 'w') as json_file:
                 json.dump(config, json_file, indent=4)
 
