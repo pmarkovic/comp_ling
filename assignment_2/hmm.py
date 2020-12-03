@@ -180,8 +180,20 @@ class HMM:
             for emssion in self._emissions[key]:
                 self._emissions[key][emssion] /= emissions_count
 
-    def test_model(self):
-        pass
+    def test_model(self, test_path):
+        corpus = ConllCorpusReader(test_path, ".t", ["words", "pos"])
+        result = list()
+
+        for sent in corpus.sents("de-test.t"):
+            self.do_viterbi(sent)
+            result.append(list(zip(sent, self._tags)))
+
+        with open("./tests/test.tt", 'w') as conll_file:
+            for sent in result:
+                for pair in sent:
+                    conll_file.write("\t".join(pair)+'\n')
+                conll_file.write('\n')
+        
 
     def do_viterbi(self, sentence):
         self._trellis.clear_model()
