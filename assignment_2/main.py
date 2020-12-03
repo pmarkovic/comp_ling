@@ -8,8 +8,10 @@ def main():
     pass
 
 if __name__ == "__main__":
-    model = HMM(2, is_config=False, config_path="default.json", train_path=os.path.join(os.getcwd(), "data"))
-    #model.print_model()
+    model = HMM(2, is_config=True, config_path="./configs/config_0.json", train_path=os.path.join(os.getcwd(), "data"), save_model=True, save_path=os.path.join(os.getcwd(), "configs", "config_0.json"))
+    
+
+    #model.check_total_probs()
 
     #model.do_viterbi(["2", "1", "1"])
     #model.print_tags()

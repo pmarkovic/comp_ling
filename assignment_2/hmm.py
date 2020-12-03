@@ -1,5 +1,6 @@
 import json
 from collections import deque
+import numpy as np
 from nltk.corpus.reader.conll import ConllCorpusReader
 
 
@@ -66,10 +67,13 @@ class HMM:
     """
     """
 
-    def __init__(self, n, is_config, config_path, train_path):
+    def __init__(self, n, is_config, config_path, train_path, save_model, save_path):
         self._n = n
         self._config_path = config_path
         self._train_path = train_path
+        self._save_model = save_model
+        self._save_path = save_path
+
         self._trellis = Trellis()
         self._tags = deque()
 
@@ -85,57 +89,90 @@ class HMM:
             configuration = json.load(config_file)
 
             self._states = configuration["states"]
+            self._words = configuration["words"]
             self._transitions = configuration["transitions"]
             self._emissions = configuration["emissions"]
             self._initial_state = State(INITIAL_STATE, max_prob=1.0)
 
     def _train_model(self):
+        self._states = list()
+        self._words = list()
+        self._transitions = {INITIAL_STATE: dict()}
+        self._emissions = dict()
         corpus = ConllCorpusReader(self._train_path, ".tt", ["words", "pos"])
         sent_count = 0
-        states_config = self._init_states_config()
 
         for sent in corpus.tagged_sents("de-train.tt"):
             sent_count += 1
 
-            print(sent)
-            
-            for i in range(len(sent) - self._n):
-                tag = sent[i][1]
+            for i in range(len(sent) - 1):
+                curr_tag = sent[i][1]
 
+                if curr_tag not in self._transitions[INITIAL_STATE]:
+                    self._init_config(curr_tag)
+                
                 if i == 0:
-                    states_config[tag]["initial"] += 1
-                
-                states_config[tag]["count"] += 1
-                states_config = self._update_emissions(states_config, tag, sent[i][0])
-                
-                #TODO update transitions
+                    self._transitions[INITIAL_STATE][curr_tag] += 1
 
-            if sent_count == 1:
-                break
+                if sent[i+1][1] not in self._transitions[INITIAL_STATE]:
+                    self._init_config(sent[i+1][1])
+
+                self._transitions[curr_tag][sent[i+1][1]] += 1
+
+                self._update_emissions(curr_tag, sent[i][0])
+            
+            self._update_emissions(sent[-1][1], sent[-1][0])
         
-        #TODO create probs
+        self._calc_probs(sent_count)
 
-        self._states = TAGSET
-        #self._transitions = configuration["transitions"]
-        #self._emissions = configuration["emissions"]
         self._initial_state = State(INITIAL_STATE, max_prob=1.0)
 
-    def _init_states_config(self):
-        initial_states_config = dict()
+        if self._save_model:
+            config = {"states": self._states, "words": self._words, "transitions": self._transitions, "emissions": self._emissions}
+            with open(self._save_path, 'w') as json_file:
+                json.dump(config, json_file, indent=4)
 
-        for tag in TAGSET:
-            config = {"count": 0, "initial": 0, "emissions": dict(), "transitions": {t:0  for t in TAGSET}}
-            initial_states_config[tag] = config
+    def _init_config(self, tag):
+        self._states.append(tag)
 
-        return initial_states_config
+        for key in self._transitions.keys():
+            self._transitions[key][tag] = 0
+        
+        self._transitions[tag] = {state: 0 for state in self._states}
+        
+        self._emissions[tag] = {word: 0 for word in self._words}
 
-    def _update_emissions(self, states_config, tag, word):
-        if word not in states_config[tag]["emissions"]:
-            states_config[tag]["emissions"][word] = 0
+    def _update_emissions(self, tag, word):
+        if word not in self._emissions[tag]:
+            self._words.append(word)
+            for key in self._emissions.keys():
+                self._emissions[key][word] = 0
 
-        states_config[tag]["emissions"][word] += 1
+        self._emissions[tag][word] += 1
 
-        return states_config
+    def _calc_probs(self, sent_count, add_one=False):
+        if add_one:
+            num_of_states = len(self._states)
+            num_of_words = len(self._words)
+
+        # Calculating probabilities for transitions
+        for key in self._transitions.keys():
+            if key == INITIAL_STATE:
+                for next_state in self._transitions[key].keys():
+                    self._transitions[key][next_state] /= sent_count
+                
+                continue
+            
+            continues_count = sum(self._transitions[key].values())
+            for next_state in self._transitions[key].keys():
+                self._transitions[key][next_state] /= continues_count
+
+        # Calculating probabilities for emissions
+        for key in self._emissions.keys():
+            emissions_count = sum(self._emissions[key].values())
+            
+            for emssion in self._emissions[key]:
+                self._emissions[key][emssion] /= emissions_count
 
     def do_viterbi(self, sentence):
         self._trellis.clear_model()
@@ -175,9 +212,28 @@ class HMM:
                     break
 
     def print_tags(self):
-        print(f"Tags: {' '.join(self._tags)}")
+        print(f"Predicted tags: {' '.join(self._tags)}")
 
     def print_model(self):
-        print(self._states)
-        print(self._transitions)
-        print(self._emissions)
+        print("----- Model summary -----")
+        print(f"Number of states: {len(self._states)}\nStates: {self._states}")
+        print()
+        print(f"Number of words: {len(self._words)}\nWords: {self._words}")
+        print()
+        print("Transition probabilities:")
+        for key, value in self._transitions.items():
+            print(f"{key}: {value}")
+        print()
+        print("Emission probabilities:")
+        for key, value in self._emissions.items():
+            print(f"{key}: {value}")
+
+    def check_total_probs(self):
+        print("Transitions:")
+        for key, value in self._transitions.items():
+            print(f"{key}: {sum(value.values())}")
+        
+        print("Emissions:")
+        for key, value in self._emissions.items():
+            print(f"{key}: {sum(value.values())}")
+        
