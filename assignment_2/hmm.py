@@ -5,7 +5,6 @@ from nltk.corpus.reader.conll import ConllCorpusReader
 
 
 INITIAL_STATE = "initials"
-TAGSET = ["NOUN", "VERB", "ADJ", "ADV", "PRON", "DET", "ADP", "NUM", "CONJ", "PRT", ".", "X"]
 
 
 class State:
@@ -174,6 +173,9 @@ class HMM:
             for emssion in self._emissions[key]:
                 self._emissions[key][emssion] /= emissions_count
 
+    def test_model(self):
+        pass
+
     def do_viterbi(self, sentence):
         self._trellis.clear_model()
         self._trellis.add_timestep([self._initial_state])
@@ -186,7 +188,13 @@ class HMM:
                 curr_max_prob = -1
 
                 for prev_state in self._trellis.get_timestep_states(timestep):
-                    prob = prev_state.get_max_prob() * self._transitions[prev_state.get_name()][state] * self._emissions[state][word]
+                    emission = 1.0
+                    if word in self._emissions[state]:
+                        emission = self._emissions[state][word] 
+
+                    prob = prev_state.get_max_prob() \
+                        * self._transitions[prev_state.get_name()][state] \
+                        * emission
 
                     if prob > curr_max_prob:
                         curr_max_prob = prob
