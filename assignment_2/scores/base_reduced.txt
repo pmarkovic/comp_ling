@@ -1,0 +1,13 @@
+
+Comparing gold file "data/de-eval.tt" and system file "outputs/base_reduced.tt"
+
+Precision, recall, and F1 score:
+
+  ADP 0.0006 0.0013 0.0008
+  DET 0.0008 0.0020 0.0011
+ NOUN 0.1537 0.1639 0.1586
+ VERB 0.0014 0.0010 0.0011
+  ADJ 0.0073 0.0077 0.0075
+
+Accuracy: 0.0430
+

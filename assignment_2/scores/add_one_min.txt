@@ -1,0 +1,19 @@
+
+Comparing gold file "data/de-eval.tt" and system file "outputs/add_one_min.tt"
+
+Precision, recall, and F1 score:
+
+  ADV 0.1027 0.9242 0.1848
+  DET 0.7950 0.3369 0.4732
+ NOUN 0.9248 0.2641 0.4109
+ VERB 0.9196 0.3269 0.4823
+  ADP 0.8731 0.3361 0.4854
+    . 0.9573 0.2450 0.3901
+ CONJ 0.9689 0.2864 0.4421
+ PRON 0.7978 0.4071 0.5391
+  ADJ 0.8480 0.2031 0.3277
+  NUM 1.0000 0.2593 0.4118
+  PRT 0.9368 0.2899 0.4428
+
+Accuracy: 0.3405
+
