@@ -14,14 +14,11 @@ def main(args):
                 args.data_path, \
                 args.save_model)
     
-    #model.test_model(args.data_path)
     #model.print_model()
-    #model.check_total_probs()
+    model.check_total_probs()
+    #model.test_random_sents()
 
-    #model.test_model(args.data_path, args.save_test)
-
-    #model.do_viterbi(["2", "1", "1"])
-    #model.print_tags()
+    model.test_model(args.data_path, args.save_test)
 
 if __name__ == "__main__":
     """
@@ -53,5 +50,5 @@ if __name__ == "__main__":
     print(args.save_model)
 
 
-    #main(args)
+    main(args)
     print(f"Program ended. Runtime: {time.time() - start_time} sec")

@@ -136,9 +136,9 @@ class HMM:
         save_model_path : str
             Path to the file to save trained model to
         """
-        # One of paths (config_path and train_path) must be provided
+        # One of paths (config_path and data_path) must be provided
         # If both are provided, the config_path will be used
-        assert config_path is not None or train_path is not None
+        assert config_path is not None or data_path is not None
 
         self._full_emissions = full_emissions
         self._add_one = add_one
@@ -483,4 +483,19 @@ class HMM:
         print("Emissions:")
         for key, value in self._emissions.items():
             print(f"{key}: {sum(value.values())}")
+
+    def test_random_sents(self):
+        corpus = ConllCorpusReader(self._data_path, ".tt", ["words", "pos"])
+
+        for _ in range(4):
+            index = np.random.randint(10, 500)
+            sent = corpus.tagged_sents("de-train.tt")[index]
+
+            self.do_viterbi([word[0] for word in sent])
+
+            print(" ".join([word[0] for word in sent]))
+            print(" ".join([word[1] for word in sent]))
+            self.print_tags()
+            print()
+
         
