@@ -9,12 +9,13 @@ def main():
 
 if __name__ == "__main__":
 
-    model = HMM(True, \
+    model = HMM(False, \
                 "crude", \
-                config_path="./configs/config_1.json", \
-                train_path=None, \
-                save_model_path="./configs/config_1.json", \
-                save_test_path="./tests/test1.tt")
+                True, \
+                config_path=None, \
+                train_path="data", \
+                save_model_path="./configs/config_3.json", \
+                save_test_path="./tests/test3.tt")
     
     model.test_model("data")
     #model.print_model()

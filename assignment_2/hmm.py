@@ -12,6 +12,7 @@ EMISSIONS     = "emissions"
 UNK_CRUDE     = "crude"
 UNK_MEAN      = "mean"
 UNK_LOWEST    = "lowest"
+END_TOKEN     = "<END>"
 
 
 class State:
@@ -73,11 +74,12 @@ class HMM:
     """
     """
 
-    def __init__(self, add_one, unk_words, config_path, train_path, save_model_path, save_test_path):
+    def __init__(self, add_one, unk_words, end_token, config_path, train_path, save_model_path, save_test_path):
         assert config_path is not None or train_path is not None
 
         self._add_one = add_one
         self._unk_words = unk_words
+        self._end_token = end_token
         self._config_path = config_path
         self._train_path = train_path
         self._save_model_path = save_model_path
@@ -118,6 +120,9 @@ class HMM:
 
         for sent in corpus.tagged_sents("de-train.tt"):
             sent_count += 1
+            
+            if self._end_token:
+                sent.append((END_TOKEN, END_TOKEN))
 
             for i in range(len(sent) - 1):
                 curr_tag = sent[i][1]
@@ -204,11 +209,11 @@ class HMM:
     def test_model(self, test_path):
         corpus = ConllCorpusReader(test_path, ".t", ["words", "pos"])
         result = list()
-        count = 1
 
         for sent in corpus.sents("de-test.t"):
-            print(f"Processing sent {count}...")
-            count += 1
+            if self._end_token:
+                sent.append(END_TOKEN)
+
             self.do_viterbi(sent)
             result.append(list(zip(sent, self._tags)))
 
