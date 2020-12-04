@@ -74,7 +74,7 @@ class HMM:
     """
     """
 
-    def __init__(self, full_emissions, add_one, unk_words, end_token, config_path, train_path, save_model_path, save_test_path):
+    def __init__(self, full_emissions, add_one, unk_words, end_token, config_path, data_path, save_model_path):
         assert config_path is not None or train_path is not None
 
         self._full_emissions = full_emissions
@@ -82,9 +82,8 @@ class HMM:
         self._unk_words = unk_words
         self._end_token = end_token
         self._config_path = config_path
-        self._train_path = train_path
+        self._data_path = data_path
         self._save_model_path = save_model_path
-        self._save_test_path = save_test_path
 
         self._trellis = Trellis()
         self._tags = deque()
@@ -116,7 +115,7 @@ class HMM:
         self._transitions = {INITIAL_STATE: dict()}
         self._emissions = dict()
 
-        corpus = ConllCorpusReader(self._train_path, ".tt", ["words", "pos"])
+        corpus = ConllCorpusReader(self._data_path, ".tt", ["words", "pos"])
         sent_count = 0
 
         for sent in corpus.tagged_sents("de-train.tt"):
@@ -213,7 +212,7 @@ class HMM:
                 else:
                     self._emissions[key][emssion] /= emissions_count
 
-    def test_model(self, test_path):
+    def test_model(self, test_path, save_test_file):
         corpus = ConllCorpusReader(test_path, ".t", ["words", "pos"])
         result = list()
 
@@ -225,7 +224,7 @@ class HMM:
             result.append(list(zip(sent, self._tags)))
 
         try:
-            with open(self._save_test_path, 'w') as conll_file:
+            with open(save_test_file, 'w') as conll_file:
                 for sent in result:
                     for pair in sent:
                         conll_file.write("\t".join(pair)+'\n')
