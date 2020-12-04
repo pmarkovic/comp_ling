@@ -8,7 +8,6 @@ from hmm import HMM
 def main(args):
     model = HMM(args.full_emissions, \
                 args.add_one, \
-                args.unk_words, \
                 args.end_token, \
                 args.config_path, \
                 args.data_path, \
@@ -29,7 +28,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="A POS tagger implementation based on supervised HMM.")
     parser.add_argument("-full_emissions", default=False, action='store_true', help="Flag to indicate should entries for not emissioned words by tags be added.")
     parser.add_argument("-add_one", default=False, action='store_true', help="Flag to indicate add-one smoothing usage.")
-    parser.add_argument("-unk_words", default= "crude", type=str, help="Which unknown words handler to use ('crude', 'min', 'mean')")
     parser.add_argument("-end_token", default=False, action='store_true', help="Flag to indicate usage of end token. Omit if don't want.")
     parser.add_argument("-config_path", default=None, type=str, help="Path to the directory where to store trained configs.")
     parser.add_argument("-data_path", default="./data", type=str, help="Path to the directory where the data for training/testing/eval are.")
@@ -43,7 +41,6 @@ if __name__ == "__main__":
 
     print(args.full_emissions)
     print(args.add_one)
-    print(args.unk_words)
     print(args.end_token)
     print(args.config_path)
     print(args.data_path)

@@ -9,9 +9,6 @@ STATES        = "states"
 WORDS         = "words"
 TRANSITIONS   = "transitions"
 EMISSIONS     = "emissions"
-UNK_CRUDE     = "crude"
-UNK_MEAN      = "mean"
-UNK_LOWEST    = "lowest"
 END_TOKEN     = "<END>"
 
 
@@ -112,8 +109,8 @@ class HMM:
     final tags will be stored in tags attribute. 
     """
 
-    def __init__(self, full_emissions, add_one, unk_words, \
-                 end_token, config_path, data_path, save_model_path):
+    def __init__(self, full_emissions, add_one, end_token, \
+                 config_path, data_path, save_model_path):
         """
         Class constructor
         ...
@@ -125,8 +122,6 @@ class HMM:
             or if False emission probabilities only for seen words by tags will be created.
         add_one : bool
             Flag to indicates if add_one smoothing will be used
-        unk_words : str
-            Which handler for unknown words should be used ('crude', 'min', 'mean')
         end_token : bool
             Flag to indicates if <END> token will be used
         config_path : str
@@ -142,7 +137,6 @@ class HMM:
 
         self._full_emissions = full_emissions
         self._add_one = add_one
-        self._unk_words = unk_words
         self._end_token = end_token
         self._config_path = config_path
         self._data_path = data_path
@@ -401,18 +395,11 @@ class HMM:
                 curr_max_prob = -1
 
                 for prev_state in self._trellis.get_timestep_states(timestep):
-                    emission = 0.0
-
+                    
+                    # Unknown words crude handler
+                    emission = 1.0
                     if word in self._emissions[state]:
-                        emission = self._emissions[state][word] 
-                    # Unknown words handlers
-                    # Note: not smart implementations for mean and min
-                    elif self._unk_words == UNK_CRUDE:
-                        emission = 1.0
-                    elif self._unk_words == UNK_MEAN:
-                        emission = np.mean(list(self._emissions[state].values()))
-                    elif self._unk_words == UNK_LOWEST:
-                        emission = np.min(list(self._emissions[state].values()))
+                        emission = self._emissions[state][word]
 
                     # Calculate probability
                     prob = prev_state.get_max_prob() \
