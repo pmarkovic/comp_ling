@@ -74,9 +74,10 @@ class HMM:
     """
     """
 
-    def __init__(self, add_one, unk_words, end_token, config_path, train_path, save_model_path, save_test_path):
+    def __init__(self, full_emissions, add_one, unk_words, end_token, config_path, train_path, save_model_path, save_test_path):
         assert config_path is not None or train_path is not None
 
+        self._full_emissions = full_emissions
         self._add_one = add_one
         self._unk_words = unk_words
         self._end_token = end_token
@@ -162,13 +163,19 @@ class HMM:
         
         self._transitions[tag] = {state: 0 for state in self._states}
         
-        self._emissions[tag] = {word: 0 for word in self._words}
+        if self._full_emissions:
+            self._emissions[tag] = {word: 0 for word in self._words}
+        else:
+            self._emissions[tag] = dict()
 
     def _update_emissions(self, tag, word):
         if word not in self._emissions[tag]:
-            self._words.append(word)
-            for key in self._emissions.keys():
-                self._emissions[key][word] = 0
+            if self._full_emissions:
+                self._words.append(word)
+                for key in self._emissions.keys():
+                    self._emissions[key][word] = 0
+            else:
+                self._emissions[tag][word] = 0
 
         self._emissions[tag][word] += 1
 
