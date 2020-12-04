@@ -70,17 +70,20 @@ class HMM:
     """
     """
 
-    def __init__(self, n, is_config, config_path, train_path, save_model, save_path):
-        self._n = n
+    def __init__(self, add_one, unk_words, config_path, train_path, save_model_path, save_test_path):
+        assert config_path is not None or train_path is not None
+
+        self._add_one = add_one
+        self._unk_words = unk_words
         self._config_path = config_path
         self._train_path = train_path
-        self._save_model = save_model
-        self._save_path = save_path
+        self._save_model_path = save_model_path
+        self._save_test_path = save_test_path
 
         self._trellis = Trellis()
         self._tags = deque()
 
-        if is_config:
+        if self._config_path:
             self._read_config()
         else:
             self._train_model()
@@ -88,20 +91,25 @@ class HMM:
     def _read_config(self):
         assert self._config_path.endswith(".json")
 
-        with open(self._config_path) as config_file:
-            configuration = json.load(config_file)
+        try:
+            with open(self._config_path) as config_file:
+                configuration = json.load(config_file)
 
-            self._states = configuration[STATES]
-            self._words = configuration[WORDS]
-            self._transitions = configuration[TRANSITIONS]
-            self._emissions = configuration[EMISSIONS]
-            self._initial_state = State(INITIAL_STATE, max_prob=1.0)
+                self._states = configuration[STATES]
+                self._words = configuration[WORDS]
+                self._transitions = configuration[TRANSITIONS]
+                self._emissions = configuration[EMISSIONS]
+                self._initial_state = State(INITIAL_STATE, max_prob=1.0)
+        except FileNotFoundError:
+            print("Not able to open config file!")
+        
 
     def _train_model(self):
         self._states = list()
         self._words = list()
         self._transitions = {INITIAL_STATE: dict()}
         self._emissions = dict()
+
         corpus = ConllCorpusReader(self._train_path, ".tt", ["words", "pos"])
         sent_count = 0
 
@@ -130,12 +138,12 @@ class HMM:
 
         self._initial_state = State(INITIAL_STATE, max_prob=1.0)
 
-        if self._save_model:
+        if self._save_model_path:
             config = {STATES: self._states, \
                      WORDS: self._words, \
                      TRANSITIONS: self._transitions, \
                      EMISSIONS: self._emissions}
-            with open(self._save_path, 'w') as json_file:
+            with open(self._save_model_path, 'w') as json_file:
                 json.dump(config, json_file, indent=4)
 
     def _init_config(self, tag):
@@ -156,8 +164,8 @@ class HMM:
 
         self._emissions[tag][word] += 1
 
-    def _calc_probs(self, sent_count, add_one=False):
-        if add_one:
+    def _calc_probs(self, sent_count):
+        if self._add_one:
             num_of_states = len(self._states)
             num_of_words = len(self._words)
 
@@ -165,20 +173,30 @@ class HMM:
         for key in self._transitions.keys():
             if key == INITIAL_STATE:
                 for next_state in self._transitions[key].keys():
-                    self._transitions[key][next_state] /= sent_count
-                
+                    if self._add_one:
+                        self._transitions[key][next_state] += 1
+                        self._transitions[key][next_state] /= (sent_count + num_of_states)
+                    else:
+                        self._transitions[key][next_state] /= sent_count
                 continue
             
             continues_count = sum(self._transitions[key].values())
             for next_state in self._transitions[key].keys():
-                self._transitions[key][next_state] /= continues_count
+                if self._add_one:
+                    self._transitions[key][next_state] += 1
+                    self._transitions[key][next_state] /= (continues_count + num_of_states)
+                else:
+                    self._transitions[key][next_state] /= continues_count
 
         # Calculating probabilities for emissions
         for key in self._emissions.keys():
             emissions_count = sum(self._emissions[key].values())
-            
             for emssion in self._emissions[key]:
-                self._emissions[key][emssion] /= emissions_count
+                if self._add_one:
+                    self._emissions[key][emssion] += 1
+                    self._emissions[key][emssion] /= (emissions_count + num_of_words)
+                else:
+                    self._emissions[key][emssion] /= emissions_count
 
     def test_model(self, test_path):
         corpus = ConllCorpusReader(test_path, ".t", ["words", "pos"])
@@ -188,12 +206,18 @@ class HMM:
             self.do_viterbi(sent)
             result.append(list(zip(sent, self._tags)))
 
-        with open("./tests/test.tt", 'w') as conll_file:
-            for sent in result:
-                for pair in sent:
-                    conll_file.write("\t".join(pair)+'\n')
-                conll_file.write('\n')
+        try:
+            with open(self._save_test_path, 'w') as conll_file:
+                for sent in result:
+                    for pair in sent:
+                        conll_file.write("\t".join(pair)+'\n')
+                    conll_file.write('\n')
+        except FileNotFoundError:
+            print("Not able to open the file for test writing!")
+
+            return False
         
+        return True
 
     def do_viterbi(self, sentence):
         self._trellis.clear_model()
@@ -222,7 +246,8 @@ class HMM:
                 timestep_states.append(State(state, backpointer=backpointer, max_prob=curr_max_prob))
 
             self._trellis.add_timestep(timestep_states)
-            self._trellis.set_last_state()
+        
+        self._trellis.set_last_state()
 
         self._do_tagging()
 
