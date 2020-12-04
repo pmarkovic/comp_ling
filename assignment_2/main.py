@@ -10,13 +10,14 @@ def main():
 if __name__ == "__main__":
 
     model = HMM(True, \
+                "crude", \
                 config_path="./configs/config_1.json", \
                 train_path=None, \
                 save_model_path="./configs/config_1.json", \
-                save_test_path=None)
+                save_test_path="./tests/test1.tt")
     
-    #model.test_model("data")
-    model.print_model()
+    model.test_model("data")
+    #model.print_model()
     #model.check_total_probs()
 
     #model.do_viterbi(["2", "1", "1"])

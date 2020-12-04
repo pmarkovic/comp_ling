@@ -9,6 +9,9 @@ STATES        = "states"
 WORDS         = "words"
 TRANSITIONS   = "transitions"
 EMISSIONS     = "emissions"
+UNK_CRUDE     = "crude"
+UNK_MEAN      = "mean"
+UNK_LOWEST    = "lowest"
 
 
 class State:
@@ -201,8 +204,11 @@ class HMM:
     def test_model(self, test_path):
         corpus = ConllCorpusReader(test_path, ".t", ["words", "pos"])
         result = list()
+        count = 1
 
         for sent in corpus.sents("de-test.t"):
+            print(f"Processing sent {count}...")
+            count += 1
             self.do_viterbi(sent)
             result.append(list(zip(sent, self._tags)))
 
@@ -231,9 +237,16 @@ class HMM:
                 curr_max_prob = -1
 
                 for prev_state in self._trellis.get_timestep_states(timestep):
-                    emission = 1.0
+                    emission = 0.0
+
                     if word in self._emissions[state]:
                         emission = self._emissions[state][word] 
+                    elif self._unk_words == UNK_CRUDE:
+                        emission = 1.0
+                    elif self._unk_words == UNK_MEAN:
+                        emission = np.mean(list(self._emissions[state].values()))
+                    elif self._unk_words == UNK_LOWEST:
+                        emission = np.min(list(self._emissions[state].values()))
 
                     prob = prev_state.get_max_prob() \
                         * self._transitions[prev_state.get_name()][state] \
