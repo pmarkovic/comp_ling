@@ -1,5 +1,10 @@
 from nltk.corpus.reader.conll import ConllCorpusReader
 
+"""
+Script to append end token to every sentence in eval set
+in order to test properly.
+New file is created.
+"""
 
 END_TOKEN     = "<END>"
 

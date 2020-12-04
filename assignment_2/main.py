@@ -12,12 +12,13 @@ def main(args):
                 args.end_token, \
                 args.config_path, \
                 args.data_path, \
-                args.save_model, \
-                args.save_test)
+                args.save_model)
     
     #model.test_model(args.data_path)
     #model.print_model()
     #model.check_total_probs()
+
+    #model.test_model(args.data_path, args.save_test)
 
     #model.do_viterbi(["2", "1", "1"])
     #model.print_tags()
@@ -43,5 +44,14 @@ if __name__ == "__main__":
     start_time = time.time()
     print("Program started...")
 
-    main(args)
+    print(args.full_emissions)
+    print(args.add_one)
+    print(args.unk_words)
+    print(args.end_token)
+    print(args.config_path)
+    print(args.data_path)
+    print(args.save_model)
+
+
+    #main(args)
     print(f"Program ended. Runtime: {time.time() - start_time} sec")
