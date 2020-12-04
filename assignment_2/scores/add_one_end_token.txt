@@ -1,0 +1,20 @@
+
+Comparing gold file "data/de-eval_end.tt" and system file "outputs/add_one_end_token.tt"
+
+Precision, recall, and F1 score:
+
+  DET 0.7257 0.9808 0.8342
+ NOUN 0.8879 0.8406 0.8636
+ VERB 0.8924 0.8436 0.8673
+  ADP 0.8364 0.9859 0.9050
+    . 0.9425 0.9786 0.9602
+ CONJ 0.9705 0.8576 0.9106
+ PRON 0.8269 0.7770 0.8011
+  ADV 0.9072 0.7332 0.8110
+  ADJ 0.7843 0.6130 0.6882
+<END> 0.8258 1.0000 0.9046
+  NUM 1.0000 0.5519 0.7112
+  PRT 0.8646 0.8111 0.8370
+
+Accuracy: 0.8634
+
