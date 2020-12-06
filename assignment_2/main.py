@@ -12,10 +12,6 @@ def main(args):
                 args.config_path, \
                 args.data_path, \
                 args.save_model)
-    
-    #model.print_model()
-    model.check_total_probs()
-    #model.test_random_sents()
 
     model.test_model(args.data_path, args.save_test)
 
@@ -31,21 +27,15 @@ if __name__ == "__main__":
     parser.add_argument("-end_token", default=False, action='store_true', help="Flag to indicate usage of end token. Omit if don't want.")
     parser.add_argument("-config_path", default=None, type=str, help="Path to the directory where to store trained configs.")
     parser.add_argument("-data_path", default="./data", type=str, help="Path to the directory where the data for training/testing/eval are.")
-    parser.add_argument("-save_model", default="./configs/config.json", type=str, help="Name of a file for generated text")
+    parser.add_argument("-save_model", default="./configs/config.json", type=str, help="Path to a file where to save trained config.")
     parser.add_argument("-save_test", default="./outputs/test.tt", type=str, help="Path to a file for test output.")
     args = parser.parse_args()
 
     # To measure runtime
     start_time = time.time()
+
     print("Program started...")
-
-    print(args.full_emissions)
-    print(args.add_one)
-    print(args.end_token)
-    print(args.config_path)
-    print(args.data_path)
-    print(args.save_model)
-
-
+    
     main(args)
+    
     print(f"Program ended. Runtime: {time.time() - start_time} sec")

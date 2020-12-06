@@ -209,7 +209,7 @@ class HMM:
                 if i == 0:
                     self._transitions[INITIAL_STATE][curr_tag] += 1
 
-                # Update the model if it the first time to see next tag
+                # Update the model if it is the first time to see next tag
                 if sent[i+1][1] not in self._transitions[INITIAL_STATE]:
                     self._init_config(sent[i+1][1])
 
