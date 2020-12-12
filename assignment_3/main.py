@@ -5,7 +5,7 @@ def main(args):
 
     parser = Parser()
     parser.do_parsing()
-    #parser.print_nodes()
+    parser.print_nodes()
 
 
 if __name__ == "__main__":
