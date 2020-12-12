@@ -1,6 +1,19 @@
 import nltk
 
 
+def test_nltk_parser():
+    result = list()
+    grammar = nltk.data.load("./grammars/atis-grammar-cnf.cfg")
+    parser = nltk.parse.BottomUpChartParser(grammar)
+
+    sents = nltk.data.load("./grammars/atis-test-sentences.txt")
+    test_sents = nltk.parse.util.extract_test_sentences(sents)
+
+    for sent in test_sents:
+        print(sent[0])
+        print(sent[1])
+
+
 class Node:
     """
     """
@@ -50,20 +63,36 @@ class Parser:
     """
 
     def __init__(self, grammar_path="./grammars/my_grammar.cfg"):
+        print("Loading grammar...")
         self._grammar = nltk.data.load(grammar_path)
         self._nodes = dict()
 
-    def do_parsing(self, sentence="a a a a"):
+    def do_parsing(self, file_path):
+        print("Start parsing...")
+        result = list()
+
+        sents = nltk.data.load(file_path)
+        test_sents = nltk.parse.util.extract_test_sentences(sents)
+
+        for sent in test_sents:
+            result.append(" ".join(sent[0]) + "\t" + str(self.parse_sentence(sent[0])))
+
+        with open("result2.txt", 'w', encoding="utf-8") as writer:
+            writer.write("\n".join(result))
+
+        print("Finish parsing!")
+
+    def parse_sentence(self, sentence):
+        sent_len = len(sentence)
         # Check for empty sentence
-        if not sentence:
+        if len(sentence) == 0:
             return False
 
-        words = sentence.split(' ')
-        sent_len = len(words)
+        self._nodes.clear()
         
         # Initialize nodes that correspodent to length 1 sentence sequences
         for index in range(sent_len):
-            word = words[index]
+            word = sentence[index]
             new_node = Node(self._create_node_name(index, index+1), terminal=True)
             new_node.set_backpointers({prod.lhs(): (1, prod.rhs()[0]) for prod in self._grammar.productions(rhs=word)})
             new_node.update_subtrees_total_count(len(new_node.get_backpointers()))
@@ -86,6 +115,11 @@ class Parser:
                     for ln_lhs in left_node.get_backpointers():
                         for prod in self._grammar.productions(rhs=ln_lhs):
                             if prod.rhs()[1] in right_node.get_backpointers():
+
+                                # For the last node only productions with SIGMA on lhs
+                                if length == sent_len and prod.lhs() != self._grammar.start():
+                                    continue
+
                                 new_node_prod = prod.lhs()
                                 prod_nodes = (left_node.get_name(), ln_lhs, right_node.get_name(), prod.rhs()[1])
                                 prod_count = left_node.get_production_count(ln_lhs) \
@@ -101,15 +135,16 @@ class Parser:
                 new_node.set_backpointers(backpointers)
                 self._nodes[new_node.get_name()] = new_node
 
-        print(self._nodes[self._create_node_name(0, sent_len)])
-
-        return self._nodes[self._create_node_name(0, sent_len)].get_subtrees_total_count() != 0
+        return self._nodes[self._create_node_name(0, sent_len)].get_subtrees_total_count()
 
     def _create_node_name(self, left, right):
         return f"node_{left}_{right}"
 
-    def print_nodes(self):
-        for node in self._nodes.values():
-            print(f"{node}")
-
+    def print_nodes(self, to_file=False):
+        nodes = "\n".join([str(node) for node in self._nodes.values()])
+        if to_file:
+            with open("output.txt", 'a') as writer:
+                writer.write(nodes)
+        else:
+            print(nodes)
 
