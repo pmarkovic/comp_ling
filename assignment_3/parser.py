@@ -1,19 +1,6 @@
 import nltk
 
 
-def test_nltk_parser():
-    result = list()
-    grammar = nltk.data.load("./grammars/atis-grammar-cnf.cfg")
-    parser = nltk.parse.BottomUpChartParser(grammar)
-
-    sents = nltk.data.load("./grammars/atis-test-sentences.txt")
-    test_sents = nltk.parse.util.extract_test_sentences(sents)
-
-    for sent in test_sents:
-        print(sent[0])
-        print(sent[1])
-
-
 class Node:
     """
     """
