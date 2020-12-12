@@ -2,10 +2,11 @@ from parser import Parser
 
 def main(args):
     print(args)
-
+    
     parser = Parser()
-    parser.do_parsing()
-    parser.print_nodes()
+    print(f"Does grammar recognize word: {parser.do_parsing('c')}")
+    #parser.print_nodes()
+
 
 
 if __name__ == "__main__":
