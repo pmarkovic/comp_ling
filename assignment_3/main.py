@@ -25,7 +25,7 @@ def main(args):
         print(parser.parse_sentence(sentence))
         parser.generate_parse_tree(len(sentence), args.draw)
     else:
-        parser.do_parsing(args.sents_path, args.result_file)
+        parser.do_parsing(args.sents_path, args.result_file, args.trees_file)
 
     parsing_time = time.time() - parsing_time
     print("Finish parsing!")
@@ -39,6 +39,7 @@ if __name__ == "__main__":
     parser.add_argument("-gram_path", default="./grammars/atis-grammar-cnf.cfg", type=str, help="File path of a grammar.")
     parser.add_argument("-sents_path", default="./grammars/atis-test-sentences.txt", type=str, help="File path of test sentences.")
     parser.add_argument("-result_file", default="./outputs/result.txt", type=str, help="File where to write results of parsing test sentences.")
+    parser.add_argument("-trees_file", default="./outputs/parsed_trees.json", type=str, help="File where to write all possible parsed trees for test sentences.")
     parser.add_argument("-sent", default=None, type=str, help="Sentence to be parsed.")
     parser.add_argument("-draw", default=False, action='store_true', help="Flag to indicate if parse trees should be print or draw. Omit if don't want.")
     args = parser.parse_args()
