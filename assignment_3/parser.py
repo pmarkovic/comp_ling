@@ -125,7 +125,7 @@ class Parser:
 
         return self._nodes[self._create_node_name(0, sent_len)].get_subtrees_total_count()
 
-    def generate_parse_tree(self, n):
+    def generate_parse_tree(self, n, draw=False):
         if len(self._nodes) == 0:
             print("The parsing step is required first. There are no nodes!")
             return False
@@ -133,6 +133,15 @@ class Parser:
         trees = self._collect_trees(self._create_node_name(0, n), self._grammar.start())
         trees = [str(tree).replace(',', '') for tree in trees]
         trees = [nltk.Tree.fromstring(tree, brackets="[]") for tree in trees]
+
+        if trees:
+            for tree in trees:
+                if draw:
+                    tree.draw()
+                else:
+                    tree.pretty_print()
+        else:
+            print(f"Oh, there are no trees!")
 
         return trees
 
