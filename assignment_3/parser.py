@@ -55,8 +55,7 @@ class Parser:
         self._grammar = nltk.data.load(grammar_path)
         self._nodes = dict()
 
-    def do_parsing(self, file_path):
-        print("Start parsing...")
+    def do_parsing(self, file_path, result_file):
         result = list()
 
         sents = nltk.data.load(file_path)
@@ -65,10 +64,8 @@ class Parser:
         for sent in test_sents:
             result.append(" ".join(sent[0]) + "\t" + str(self.parse_sentence(sent[0])))
 
-        with open("result2.txt", 'w', encoding="utf-8") as writer:
+        with open(result_file, 'w', encoding="utf-8") as writer:
             writer.write("\n".join(result))
-
-        print("Finish parsing!")
 
     def parse_sentence(self, sentence):
         sent_len = len(sentence)
