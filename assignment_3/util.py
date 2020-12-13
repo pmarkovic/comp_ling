@@ -1,5 +1,14 @@
+"""
+Helper functions used to test this implementation with nltk parser.
+IMPORTANT: This functions can not be called through command line args.
+           Used only for testing purpose.
+"""
 
 def test_nltk_parser():
+    """
+    The function that parse test sentences using nltk parser.
+    It stores result in ./outputs/result_nltk.txt
+    """
     result = list()
     grammar = nltk.data.load("./grammars/atis-grammar-cnf.cfg")
     parser = nltk.parse.BottomUpChartParser(grammar)
@@ -10,12 +19,14 @@ def test_nltk_parser():
     counter = 0
 
     for sent in test_sents:
+        # Naive progress bar
         if counter % 10 == 0:
             print(f"Processed {counter} sents...")
         counter += 1
 
+        # Number of parsed trees, will be set to 0
+        # if a terminal is not in grammar
         parses_count = -1
-
         try:
             chart = parser.chart_parse(sent[0])
         except Exception as er:
@@ -24,17 +35,24 @@ def test_nltk_parser():
         if parses_count == 0:
             result.append(" ".join(sent[0]) + f"\t{parses_count}")
         else:
-            result.append(" ".join(sent[0]) + f"\t{len(list(chart.parses(grammar.start())))}")
+            parses_count = len(list(chart.parses(grammar.start())))
+            result.append(" ".join(sent[0]) + f"\t{parses_count}")
     
-    with open("result_nltk.txt", 'w') as writer:
+    with open("./outputs/result_nltk.txt", 'w') as writer:
         writer.write("\n".join(result))
 
 
 def compare_results():
-    with open("result.txt", 'r') as my_result:
+    """
+    Function used to test results between this implementation and nltk.
+    It just goes line by line in both result files 
+    and checks if the numbers match.
+    It prints sentences if numbers don't match.
+    """
+    with open("./outputs/result.txt", 'r') as my_result:
         my_lines = my_result.readlines()
 
-    with open("result_nltk.txt", 'r') as nltk_result:
+    with open("./outputs/result_nltk.txt", 'r') as nltk_result:
         nltk_lines = nltk_result.readlines()
 
     for i in range(len(my_lines)):

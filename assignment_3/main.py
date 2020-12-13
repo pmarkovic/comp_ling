@@ -8,6 +8,8 @@ from util import test_nltk_parser, compare_results
 WELCOME_MSG = "Let's welcome CKY!"
 
 def main(args):
+    # The message was here the whole time during development
+    # so I didn't have heart to remove it :D
     print(WELCOME_MSG)
 
     init_grammar_time = time.time()
