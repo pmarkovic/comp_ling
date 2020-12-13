@@ -1,4 +1,5 @@
 import nltk
+from collections import deque
 
 
 class Node:
@@ -124,8 +125,37 @@ class Parser:
 
         return self._nodes[self._create_node_name(0, sent_len)].get_subtrees_total_count()
 
+    def generate_parse_tree(self, n):
+        if len(self._nodes) == 0:
+            print("The parsing step is required first. There are no nodes!")
+            return False
+
+        trees = self._collect_trees(self._create_node_name(0, n), self._grammar.start())
+        trees = [str(tree).replace(',', '') for tree in trees]
+        trees = [nltk.Tree.fromstring(tree, brackets="[]") for tree in trees]
+
+        return trees
+
+
     def _create_node_name(self, left, right):
         return f"node_{left}_{right}"
+
+    def _collect_trees(self, node_name, symbol):
+        node = self._nodes[node_name]
+
+        if node.is_terminal():
+            return [node.get_productions(symbol)[1]]
+
+        curr_trees = list()
+        for prod in node.get_productions(symbol)[1]:
+            left_trees = self._collect_trees(prod[0], prod[1])
+            right_trees = self._collect_trees(prod[2], prod[3])
+
+            for left_tree in left_trees:
+                for right_tree in right_trees:
+                    curr_trees.append([symbol, [prod[1], left_tree], [prod[3], right_tree]])
+
+        return curr_trees
 
     def print_nodes(self, to_file=False):
         nodes = "\n".join([str(node) for node in self._nodes.values()])
