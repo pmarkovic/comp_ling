@@ -237,6 +237,8 @@ class Parser:
 
         if not trees:
             print("Oh, there are no trees.")
+
+            return trees
         
         # Process trees to be in the right form
         trees = [str(tree).replace(',', '') for tree in trees]
