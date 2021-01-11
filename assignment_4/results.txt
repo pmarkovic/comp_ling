@@ -1,0 +1,28 @@
+Achieved results for different models!
+
+--------------------
+Baseline -t 0.5
+
+Precision = 0.243110
+Recall = 0.544379
+AER = 0.681684
+--------------------
+Baseline -t 0.9
+
+Precision = 0.836364
+Recall = 0.133136
+AER = 0.768448
+--------------------
+Baseline -t 0.1
+
+Precision = 0.167335
+Recall = 0.855030
+AER = 0.775680
+--------------------
+Baseline -t 0.7
+
+Precision = 0.362637
+Recall = 0.328402
+AER = 0.653846
+--------------------
+
