@@ -35,13 +35,33 @@ def main(args):
                 break
 
     target_voc_size = len(probs_target_source)
-    count_target_source = {key: copy.deepcopy(count_source_words) for key in count_target_source.keys()}
     probs_target_source = {key: copy.deepcopy({k: 1/target_voc_size for k in count_source_words.keys()}) for key in probs_target_source.keys()}
 
     #word = random.choice(list(count_source_words.keys()))
     #total_sum = sum([value[word] for value in probs_target_source.values()])
        
     # EM training
+    for iter in range(args.i):
+        # All counts to zero
+        count_source_words = {key: 0 for key in count_source_words.keys()}
+        count_target_source = {key: copy.deepcopy(count_source_words) for key in count_target_source.keys()}
+
+        # E-step
+        for example, (source_sent, target_sent) in enumerate(bitext):
+            for target_word in target_sent:
+                # Calculate value for normalization term
+                norm_term = sum([probs_target_source[target_word][source_word] for source_word in source_sent])
+
+                for source_word in source_sent:
+                    # Calculate expected count
+                    expected_count = probs_target_source[target_word][source_word] / norm_term
+                    count_target_source[target_word][source_word] += expected_count
+                    count_source_words[source_word] += expected_count
+
+        # M-step
+        for target_word in probs_target_source.keys():
+            for source_word in count_source_words.keys():
+                probs_target_source[target_word][source_word] = count_target_source[target_word][source_word] / count_source_words[source_word]
 
     # Choosing alignments
 
