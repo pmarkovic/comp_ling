@@ -1,3 +1,4 @@
+import sys
 import copy
 import time
 import argparse
@@ -5,8 +6,6 @@ import random
 
 
 def main(args):
-    print("Welcome....")
-
     # Initialization
     source_path = args.data + '.' + args.e
     target_path = args.data + '.' + args.f
@@ -64,6 +63,20 @@ def main(args):
                 probs_target_source[target_word][source_word] = count_target_source[target_word][source_word] / count_source_words[source_word]
 
     # Choosing alignments
+    for example, (source_sent, target_sent) in enumerate(bitext):
+        alignment = list()
+
+        for target_pos, target_word in enumerate(target_sent):
+            best_prob = 0
+            best_position = 0
+
+            for position, source_word in enumerate(source_sent):
+                if probs_target_source[target_word][source_word] > best_prob:
+                    best_prob = probs_target_source[target_word][source_word]
+                    best_position = position
+
+            sys.stdout.write("%i-%i " % (target_pos, best_position))
+        sys.stdout.write("\n")
 
 
 if __name__ == "__main__":
