@@ -75,12 +75,12 @@ def main(args):
                     best_prob = probs_target_source[(target_word, source_word)]
                     best_position = position
 
-            #sys.stdout.write("%i-%i " % (target_pos, best_position))
-        #sys.stdout.write("\n")
+            sys.stdout.write("%i-%i " % (target_pos, best_position))
+        sys.stdout.write("\n")
 
     alignment_end = time.time()
-    print(f"EM training time: {em_end - em_start}")
-    print(f"Alignment time: {alignment_end - alignment_start}")
+    #print(f"EM training time: {em_end - em_start}")
+    #print(f"Alignment time: {alignment_end - alignment_start}")
 
 
 if __name__ == "__main__":
@@ -94,4 +94,4 @@ if __name__ == "__main__":
 
     start_time = time.time()
     main(args)
-    print(f"Total time: {time.time() - start_time}")
+    #print(f"Total time: {time.time() - start_time}")
