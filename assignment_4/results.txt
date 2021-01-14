@@ -25,10 +25,40 @@ Precision = 0.362637
 Recall = 0.328402
 AER = 0.653846
 --------------------
-IBM Model 1 -i 10
+fast_align -i 10
 
-Precision = 0.581137
-Recall = 0.736686
-AER = 0.369218
+Precision = 0.762481
+Recall = 0.831361
+AER = 0.214214
+--------------------
+IBM Model 1 -t 0.5
+
+Precision = 0.717241
+Recall = 0.550296
+AER = 0.372611
+--------------------
+IBM Model 1 -t 0.9
+
+Precision = 0.935484
+Recall = 0.076923
+AER = 0.850949
+--------------------
+IBM Model 1 -t 0.1
+
+Precision = 0.510012
+Recall = 0.869822
+AER = 0.387532
+--------------------
+IBM Model 1 -t 0.7
+
+Precision = 0.794286
+Recall = 0.381657
+AER = 0.477583
+--------------------
+IBM Model 1 -t 0.3
+
+Precision = 0.711670
+Recall = 0.745562
+AER = 0.273548
 --------------------
 

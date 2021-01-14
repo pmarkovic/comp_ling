@@ -6,8 +6,9 @@ from collections import defaultdict
 
 def main(args):
     # Initialization
-    source_path = args.data + '.' + args.e
-    target_path = args.data + '.' + args.f
+    source_path = args.data + '.' + args.f
+    target_path = args.data + '.' + args.e
+    threshold = args.t
 
     source_count = 0
     target_count = 0
@@ -67,15 +68,9 @@ def main(args):
     alignment_start = time.time()
     for example, (source_sent, target_sent) in enumerate(bitext):
         for target_pos, target_word in enumerate(target_sent):
-            best_prob = 0
-            best_position = 0
-
             for position, source_word in enumerate(source_sent):
-                if probs_target_source[(target_word, source_word)] > best_prob:
-                    best_prob = probs_target_source[(target_word, source_word)]
-                    best_position = position
-
-            sys.stdout.write("%i-%i " % (target_pos, best_position))
+                if probs_target_source[(target_word, source_word)] > threshold:
+                    sys.stdout.write("%i-%i " % (position, target_pos))
         sys.stdout.write("\n")
 
     alignment_end = time.time()
@@ -89,6 +84,7 @@ if __name__ == "__main__":
     parser.add_argument("-e", default="e", type=str, help="Suffix of Source lang filename (default=e)")
     parser.add_argument("-f", default="f", type=str, help="Suffix of Target lang filename (default=f)")
     parser.add_argument("-i", default=10, type=int, help="Number of iteration for EM algorithm (default=10)")
+    parser.add_argument("-t", default=0.5, type=float, help="Threshold for alignment.")
     parser.add_argument("-n", default=100000000000, type=int, help="Number of sentences to use for training and alignment")
     args = parser.parse_args()
 
