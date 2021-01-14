@@ -4,12 +4,19 @@ import argparse
 from collections import defaultdict
 
 
+"""
+Implementation of IBM Model 1 for word alignment for statistical machine translation task
+"""
+
+
 def main(args):
     # Initialization
+    # Source are foreign examples, target are english examples
     source_path = args.data + '.' + args.f
     target_path = args.data + '.' + args.e
     threshold = args.t
 
+    # Helper dictionaries to transform sentences to encodings
     source_count = 0
     target_count = 0
     source2ind = dict()
@@ -21,24 +28,28 @@ def main(args):
             source_sent_words = list()
             target_sent_words = list()
 
+            # Transform source sentence into appropriate encoding
             for source_word in source_sent.strip().split():
                 if source_word not in source2ind:
                     source2ind[source_word] = source_count
                     source_count += 1
                 source_sent_words.append(source2ind[source_word])
 
+            # Transform target sentence into appropriate encoding
             for target_word in target_sent.strip().split():
                 if target_word not in target2ind:
                     target2ind[target_word] = target_count
                     target_count += 1
                 target_sent_words.append(target2ind[target_word])
 
+            # Store encoded example pair
             bitext.append([source_sent_words, target_sent_words])
                     
             if pair == args.n-1:
                 break
-
-    probs_target_source = defaultdict(lambda: 1/target_count)
+    
+    # Initialize P(e|f)
+    probs_target_source = defaultdict(lambda: 1/source_count)
        
     # EM training
     em_start = time.time()
@@ -54,12 +65,13 @@ def main(args):
                 norm_term = sum([probs_target_source[(target_word, source_word)] for source_word in source_sent])
 
                 for source_word in source_sent:
-                    # Calculate expected count
+                    # Calculate expected counts
                     expected_count = probs_target_source[(target_word, source_word)] / norm_term
                     count_target_source[(target_word, source_word)] += expected_count
                     count_source_words[source_word] += expected_count
 
         # M-step
+        # key is (e, f)
         probs_target_source.update({key: count_target_source[key]/count_source_words[key[1]] for key in probs_target_source.keys()})
 
     em_end = time.time()

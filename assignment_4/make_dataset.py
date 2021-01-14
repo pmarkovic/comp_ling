@@ -1,5 +1,9 @@
 import argparse
 
+"""
+Helper script for transforming dataset in appropriate format for fast_align model
+Format: foreign sentence ||| english sentence
+"""
 
 def make_dataset(args):
     source_path = args.data + '.' + args.f
