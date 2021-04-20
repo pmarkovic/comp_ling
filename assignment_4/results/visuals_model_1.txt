@@ -1,0 +1,354 @@
+  Alignment 0  KEY: ( ) = guessed, * = sure, ? = possible
+  ------------------------------------------------------------------------------------
+ |(*)                                                                                  | chacun
+ |    ?                                                                                | en
+ |       ?                                                                             | lui
+ |       ?                                                                             | -
+ |       ?                                  ( )                                        | même
+ |         (*)                           ( )                                           | est
+ |            (*)                                                                      | très
+ |               (*)                              ( )                                  | complexe
+ |                                                                                     | et
+ |                        (*)      ( )                     ( )                         | le
+ |                           (*)                                                       | lien
+ |                              (*)                                                    | entre
+ |                        ( )      (*)                     ( )                         | les
+ |                                    (*)                                              | deux
+ |                        ( )      ( )             ?       ( )                         | le
+ |         ( )                           (*)                                           | est
+ |                                           ?                                         | encore
+ |                                             (?) ?                                   | davantage
+ |                                                    ?                                | de
+ |                                                    ?                                | sorte
+ |                                                    ?                                | que
+ |                                                                  (*)                | pour
+ |                                                                      ?  ?           | beaucoup
+ |                        ( )      ( )                     (*)                         | la
+ |                                                               (*)                   | situation
+ |                                                                                     | présente
+ |         ( )                           ( )             ?                       ?     | est
+ |                                                       ?                       ?     | confuse
+ |                                                                                 (*) | .
+  ------------------------------------------------------------------------------------
+   e  o  t  i  v  c  ,  b  t  l  b  t  t  i  e  m  c  w  m  t  w  s  f  m  p  u  c  . 
+   a  f  h  s  e  o     u  h  i  e  h  w  s  v  o  o  h  a  h  h  i  o  o  e  n  o    
+   c     e     r  m     t  e  n  t  e  o     e  r  m  i  k  e  o  t  r  s  o  d  n    
+   h     m     y  p           k  w           n  e  p  c  e     l  u     t  p  e  f    
+                  l              e                 l  h  s     e  a        l  r  u    
+                  e              e                 e              t        e  s  s    
+                  x              n                 x              i           t  i    
+                                                                  o           a  n    
+                                                                  n           n  g    
+                                                                              d       
+                                                                              a       
+                                                                              b       
+                                                                              l       
+                                                                              y       
+
+  Alignment 1  KEY: ( ) = guessed, * = sure, ? = possible
+  ---------------
+ | ?  ?  ?  ?     | je
+ | ?  ?  ?  ?     | poursuis
+ |(?) ?  ?  ?     | la
+ | ?  ?  ?  ?     | lecture
+ | ?  ?  ?  ?     | de
+ |(?) ?  ?  ?     | les
+ | ?  ?  ?  ?     | recommandations
+ | ?  ?  ?  ?     | de
+ |(*) ?  ?  ?     | les
+ | ?  *  ?  ?     | commissaires
+ |            (*) | :
+  ---------------
+   t  c  w  o  : 
+   h  o  e  n    
+   e  m  n       
+      m  t       
+      i          
+      s          
+      s          
+      i          
+      o          
+      n          
+      n          
+      e          
+      r          
+      s          
+
+  Alignment 2  KEY: ( ) = guessed, * = sure, ? = possible
+  ---------------------------------------------------------------------------
+ |(*)                                                                         | ils
+ |   (*)            ( )                                                       | sont
+ |       *                                                                    | restreints
+ |         (*)                                                                | par
+ |                                                                            | certaines
+ |            (*)                                                             | limites
+ |                *                                                           | qui
+ |                ?  ?  ?                                                     | ont
+ |                ?  ?  ?                                                     | été
+ |                ?  ?  ?                                                     | fixées
+ |                         ?  ? (?)                                           | pour
+ |                                 (*)                                        | garantir
+ |                                    (*)                        ( )          | que
+ |                                       (*)                                  | la
+ |                                          (*)                               | liberté
+ |                                              *                             | de
+ |                                                 *                          | une
+ |                                                   (*)                      | personne
+ |                                                         (*)                | ne
+ |                                                       ?     ?              | empiète
+ |                                                         (*)                | pas
+ |                                                       ?     ?              | sur
+ |                                                                *           | celle
+ |                                                                   *        | de
+ |                                                                      *     | une
+ |                                                                     (*)    | autre
+ |                                                                        (*) | .
+  ---------------------------------------------------------------------------
+   t  a  c  b  l  w  a  i  i  o  t  e  t  t  f  o  o  p  d  n  v  t  o  a  . 
+   h  r  o  y  i  h  r  m  n  r  o  n  h  h  r  f  n  e  o  o  i  h  f  n    
+   e  e  n     m  i  e  p     d     s  a  e  e     e  r  e  t  o  a     o    
+   y     s     i  c     o     e     u  t     e        s  s     l  t     t    
+         t     t  h     s     r     r        d        o        a        h    
+         r     s        e           e        o        n        t        e    
+         a              d                    m                 e        r    
+         i                                                                   
+         n                                                                   
+         e                                                                   
+         d                                                                   
+
+  Alignment 3  KEY: ( ) = guessed, * = sure, ? = possible
+  ------------------------------------------------------
+ | *                                                     | il
+ |                                                       | ne
+ |    ?                                                  | a
+ |    *                                                  | fait
+ |                                                       | que
+ | ?        ?  ?                                         | rendre
+ | ?        ?  ?                   (*)                   | légal
+ | ?        ?  ?                                         | ,
+ |                                     *  ?  ?  ?  ?     | à
+ |                                     ? (*) ?  ?  ?     | toutes
+ |                                    (?) ?  ?  ? (?)    | fins
+ |                                     ?  ?  ?  ?  ?     | utiles
+ |                                                       | ,
+ |      (*)                                              | le
+ |          ?  ?  ?                                      | commerce
+ |                   ?  ?                                | sexuel
+ |                         *                             | dans
+ |                           (*)                         | nos
+ |                              (*)                      | rues
+ |                                                   (*) | .
+  ------------------------------------------------------
+   i  m  t  b  a  s  o  s  o  o  s  l  f  a  i  a  p  . 
+   t  a  h  u  n  e  f  e  n  u  t  e  o  l  n  n  u    
+      d  e  y  d  l     x     r  r  g  r  l  t  d  r    
+      e     i     l              e  a        e     p    
+            n     i              e  l        n     o    
+            g     n              t           t     s    
+                  g              s           s     e    
+                                                   s    
+
+  Alignment 4  KEY: ( ) = guessed, * = sure, ? = possible
+  ---------------------------------------------------------------------------
+ |( )          ?                            ( )         ( )                   | le
+ |             ?                                                              | projet
+ |             ?                                                              | de
+ |             ?                                                              | loi
+ |            ( )(*)                                                          | C
+ |                  (*)                                                       | -
+ |                     (*)                                                    | 49
+ |                                                                            | ,
+ | ?  ?  ?  ?                                                                 | de
+ |(*) ?  ?  ?                               ( )         ( )                   | la
+ | ? (?) ?  ?                                                                 | façon
+ | ?  ?  ?  *                                                                 | dont
+ |                                                                            | il
+ |                         ?  ?  ?                                            | est
+ |                         ?  ?  ?                                            | présenté
+ |                                 (*)                                        | aujourd'
+ |                                 (*)                                        | hui
+ |                                                                            | ,
+ |                                     ?  *  ?  ?                             | nous
+ |                                     ?  ?  ?  ?                             | fait
+ |                                     ?  ?  ?  ?                             | sentir
+ |                                                (*)                         | que
+ |                                                   (*)                      | seules
+ |( )                                       ( )         (*)                   | les
+ |                                                          *                 | prostituées
+ |                                                            (*)             | sont
+ |                                                                *           | punies
+ |                                                                  (*)       | et
+ |                                                                      *     | stigmatisées
+ |                                                                        (*) | .
+  ---------------------------------------------------------------------------
+   t  w  i  w  B  C  -  4  h  b  p  t  g  u  t  f  t  o  t  p  a  p  a  s  . 
+   h  a  n  h  i        9  a  e  r  o  i  s  h  e  h  n  h  r  r  u  n  t    
+   e  y     i  l           s  e  e  d  v     e  e  a  l  e  o  e  n  d  i    
+            c  l              n  s  a  e        l  t  y     s     i     g    
+            h                    e  y  s        i           t     s     m    
+                                 n              n           i     h     a    
+                                 t              g           t     e     t    
+                                 e                          u     d     i    
+                                 d                          t           z    
+                                                            e           e    
+                                                            s           d    
+
+  Alignment 5  KEY: ( ) = guessed, * = sure, ? = possible
+  ------------------------------------
+ |(*)                                  | je
+ |    *                                | ne
+ |( )    ?                             | ai
+ |   (*)                               | jamais
+ |      (?)                            | rencontré
+ |         (*)                         | une
+ |                                     | seule
+ |                *          ( )       | prostituée
+ |             ?                       | de
+ |             *                       | rue
+ |                  (*)                | qui
+ |                     (*)             | voulait
+ |                         ?  ?  ?     | exercer
+ |         ( )             ?  ?  ?     | un
+ |                         ?  ?  ?     | tel
+ |                         ?  ?  ?     | métier
+ |                                 (*) | .
+  ------------------------------------
+   I  n  m  a  s  h  w  w  t  b  t  . 
+      e  e     t  o  h  a  o  e  h    
+      v  t     r  o  o  n        e    
+      e        e  k     t        r    
+      r        e  e     e        e    
+               t  r     d             
+
+  Alignment 6  KEY: ( ) = guessed, * = sure, ? = possible
+  ------------------------------------------------------------------
+ |( )      ( )                  ( )    ?                             | le
+ |                                          (*)                      | 28
+ |                                       (*)                         | juin
+ |                                             (*)                   | ,
+ |                                                                   | je
+ |                                                                   | ai
+ |                                                                   | eu
+ |( )      ( )                  ( )                                  | le
+ |                                                                   | grand
+ |                                                                   | plaisir
+ |                                             ( )                   | ,
+ |                                                                   | avec
+ |                               ?  ?                                | de
+ |                               ?  ?                                | autres
+ |                               ?  ?                                | députés
+ |                                             ( )                   | ,
+ |                                                                   | de
+ |                                                                   | voir
+ |                                                                   | créer
+ |( )      (*)                  ( )                                  | le
+ |               (*)                                                 | comité
+ |             *                                                     | permanent
+ |                                                               (*) | .
+  ------------------------------------------------------------------
+   t  e  o  t  s  c  b  u  c  o  t  H  o  J  2  ,  1  h  a  b  n  . 
+   h  s  f  h  t  o  y  n  o  f  h  o  n  u  8     9  a  l  e  o    
+   e  t     e  a  m     a  n     e  u     n        8  s  r  e  t    
+      a        n  m     n  s        s     e        5     e  n  e    
+      b        d  i     i  e        e                    a     d    
+      l        i  t     m  n                             d          
+      i        n  t     o  t                             y          
+      s        g  e     u                                           
+      h           e     s                                           
+      m                                                             
+      e                                                             
+      n                                                             
+      t                                                             
+
+  Alignment 7  KEY: ( ) = guessed, * = sure, ? = possible
+  ------------------------------------------------
+ |(*)                                              | je
+ |         (?) ?                                   | le
+ |( )(*) ?                                         | ai
+ |    ?  ?                                         | cité
+ |               (*)                               | comme
+ |                   ? (*)                         | exemple
+ |                         *                       | de
+ |                                          (*)    | propriété
+ |                                       (*)       | publique
+ |                            *                    | créatrice
+ |                              (*)                | ,
+ |                                  ?              | dynamique
+ |                                                 | et
+ |                                    (*)          | efficace
+ |                                             (*) | .
+  ------------------------------------------------
+   I  h  s  t  C  a  a  e  o  c  ,  a  e  p  o  . 
+      a  t  h  D  s  n  x  f  r     g  f  u  w    
+      v  r  e  C        a     e     g  f  b  n    
+      e  e              m     a     r  e  l  e    
+         s              p     t     e  c  i  r    
+         s              l     i     s  t  c  s    
+         e              e     v     s  i     h    
+         d                    e     i  v     i    
+                                    v  e     p    
+                                    e             
+
+  Alignment 8  KEY: ( ) = guessed, * = sure, ? = possible
+  ---------------------------------------------------------------
+ | ?  ?                                                           | jusque
+ | ?  ?                                                           | ici
+ |      (*)                                                       | ,
+ |          ?                                                     | près
+ |          ?                                                     | de
+ |            (*)                                                 | $
+ |                *                                               | 250,000
+ |                  (*)                                           | ont
+ |                     (*)                                        | été
+ |                         ?                                      | octroyés
+ |                           (*)                                  | par
+ |                              (*)                         ?     | le
+ |                                 (*)                            | institut
+ |                                    (*)                         | en
+ |                                       (*)                      | subventions
+ |                                           ?                    | à
+ |                              ( )             ?                 | la
+ |                                             (*)                | recherche
+ |                                                (*)             | ou
+ |                                           ?                    | à
+ |                                           ?        ?  ?  ?     | de
+ |                              ( )                   ?  ?  ?     | les
+ |                                                    ?  ?  ?     | programmes
+ |                                                    ?  ?  ?     | de
+ |                                                    ? (*) ?     | éducation
+ |                                                    ?  ?  ?     | de
+ |                              ( )                   ?  ?  ?     | le
+ |                                                   (?) ?  ?     | public
+ |                                                            (*) | .
+  ---------------------------------------------------------------
+   s  f  ,  a  $  2  h  b  i  b  t  i  i  g  f  r  o  p  e  a  . 
+   o  a     r     5  a  e  s  y  h  n  n  r  o  e  r  u  d  c    
+      r     o     0  v  e  s     e  s     a  r  s     b  u  t    
+            u     ,  e  n  u        t     n     e     l  c  i    
+            n     0        e        i     t     a     i  a  v    
+            d     0        d        t     s     r     c  t  i    
+                  0                 u           c        i  t    
+                                    t           h        o  y    
+                                    e                    n       
+
+  Alignment 9  KEY: ( ) = guessed, * = sure, ? = possible
+  ------------
+ |(?) ?        | permettez
+ | ?  ?        | -
+ | ? (?)       | moi
+ |       ?     | de
+ |       *     | conclure
+ |         (*) | .
+  ------------
+   l  m  c  . 
+   e  e  o    
+   t     n    
+         c    
+         l    
+         u    
+         d    
+         e    
+
+Precision = 0.711670
+Recall = 0.745562
+AER = 0.273548

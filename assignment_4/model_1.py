@@ -1,5 +1,4 @@
 import sys
-import time
 import argparse
 from collections import defaultdict
 
@@ -52,7 +51,6 @@ def main(args):
     probs_target_source = defaultdict(lambda: 1/source_count)
        
     # EM training
-    em_start = time.time()
     for iter in range(args.i):
         # All counts to zero
         count_source_words = defaultdict(float)
@@ -74,20 +72,13 @@ def main(args):
         # key is (e, f)
         probs_target_source.update({key: count_target_source[key]/count_source_words[key[1]] for key in probs_target_source.keys()})
 
-    em_end = time.time()
-
     # Choosing alignments
-    alignment_start = time.time()
     for example, (source_sent, target_sent) in enumerate(bitext):
         for target_pos, target_word in enumerate(target_sent):
             for position, source_word in enumerate(source_sent):
                 if probs_target_source[(target_word, source_word)] > threshold:
                     sys.stdout.write("%i-%i " % (position, target_pos))
         sys.stdout.write("\n")
-
-    alignment_end = time.time()
-    #print(f"EM training time: {em_end - em_start}")
-    #print(f"Alignment time: {alignment_end - alignment_start}")
 
 
 if __name__ == "__main__":
@@ -100,6 +91,4 @@ if __name__ == "__main__":
     parser.add_argument("-n", default=100000000000, type=int, help="Number of sentences to use for training and alignment")
     args = parser.parse_args()
 
-    start_time = time.time()
     main(args)
-    #print(f"Total time: {time.time() - start_time}")
